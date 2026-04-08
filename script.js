@@ -12,9 +12,8 @@ const CONFIG = {
 const loader = document.getElementById('loader');
 const modal = document.getElementById('info-modal');
 const closeModalButton = document.getElementById('close-modal');
-const audioButton = document.getElementById('audio-greeting');
-const audioStatus = document.getElementById('audio-status');
-const audioFallbackLink = document.getElementById('audio-fallback-link');
+const greetingAudioButton = document.getElementById('audio-greeting');
+const responseAudioButton = document.getElementById('audio-response');
 const Globe = globalThis.Globe;
 const d3 = globalThis.d3;
 const topojson = globalThis.topojson;
@@ -24,6 +23,7 @@ let activeCountry = null;
 let activeGreeting = null;
 let countries = [];
 let activeAudio = null;
+let activeAudioButton = null;
 let slideshowScrollHandler = null;
 
 async function init() {
@@ -253,7 +253,7 @@ function createPinElement(data) {
         <svg viewBox="0 0 24 24" class="globe-pin" style="width: 34px; height: 34px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); transform: translate(-50%, -100%); cursor: pointer; transform-origin: center bottom;">
             <path class="pin-bg" data-country-name="${data.greetingData.name}" data-id="${data.id}" data-default-color="${data.color}" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="${data.color}" stroke="white" stroke-width="1" />
             <circle cx="12" cy="9" r="5" fill="white" />
-            <path d="M12 6.4l1.15 2.35 2.6.38-1.88 1.83.44 2.59L12 12.32l-2.31 1.23.44-2.59-1.88-1.83 2.6-.38L12 6.4z" fill="#f97316" />
+            <path d="M11.8 5.8v6.8a.55.55 0 0 1-.9.42L8.4 11.1H6.3a1.1 1.1 0 0 1-1.1-1.1V8a1.1 1.1 0 0 1 1.1-1.1h2.1l2.5-1.93a.55.55 0 0 1 .9.44Zm2.3 1.45a.55.55 0 0 1 .78 0 3.85 3.85 0 0 1 0 5.45.55.55 0 1 1-.78-.78 2.75 2.75 0 0 0 0-3.89.55.55 0 0 1 0-.78Zm1.55-1.4a.55.55 0 0 1 .78 0 5.8 5.8 0 0 1 0 8.2.55.55 0 1 1-.78-.78 4.7 4.7 0 0 0 0-6.64.55.55 0 0 1 0-.78Z" fill="#f97316" />
         </svg>
     `;
     element.style.pointerEvents = 'auto';
@@ -326,19 +326,16 @@ function findGreetingByPolygonName(polygonName) {
 function showModal(entry) {
     modal.classList.remove('hidden');
     document.getElementById('country-name').textContent = entry.name;
-    document.getElementById('language-name').textContent = entry.language;
     document.getElementById('greeting-text').textContent = entry.greeting;
     document.getElementById('response-text').textContent = entry.response;
-    document.getElementById('transliteration-text').textContent = entry.transliteration;
-    audioStatus.textContent = 'Πάτησε το εικονίδιο για να παίξει το αποθηκευμένο mp3.';
-    audioFallbackLink.href = entry.audioSrc;
 
     const flag = document.getElementById('country-flag');
     flag.innerHTML = entry.flag
         ? `<img src="https://flagcdn.com/w80/${entry.flag}.png" alt="${entry.name}">`
         : '';
 
-    audioButton.onclick = () => playGreeting(entry);
+    greetingAudioButton.onclick = () => playAudio(entry.greetingAudioSrc, greetingAudioButton);
+    responseAudioButton.onclick = () => playAudio(entry.responseAudioSrc, responseAudioButton);
     buildSlideshow(entry.images || []);
 }
 
@@ -405,32 +402,51 @@ function buildSlideshow(images) {
     track.scrollTo({ left: 0, behavior: 'auto' });
 }
 
-function playGreeting(entry) {
+function playAudio(src, button) {
     if (activeAudio) {
         activeAudio.pause();
         activeAudio.currentTime = 0;
     }
+    if (activeAudioButton) {
+        activeAudioButton.classList.remove('is-playing');
+    }
 
-    const audio = new Audio(entry.audioSrc);
+    const audio = new Audio(src);
     activeAudio = audio;
-
-    audioStatus.textContent = `Αναπαραγωγή: ${entry.greeting}`;
+    activeAudioButton = button;
+    if (button) {
+        button.classList.add('is-playing');
+    }
 
     audio.addEventListener('ended', () => {
         if (activeAudio === audio) {
-            audioStatus.textContent = 'Η αναπαραγωγή ολοκληρώθηκε.';
+            activeAudio = null;
+        }
+        if (activeAudioButton === button && button) {
+            button.classList.remove('is-playing');
+            activeAudioButton = null;
         }
     });
 
     audio.addEventListener('error', () => {
+        if (activeAudioButton === button && button) {
+            button.classList.remove('is-playing');
+            activeAudioButton = null;
+        }
         if (activeAudio === audio) {
-            audioStatus.textContent = 'Δεν ήταν δυνατή η αναπαραγωγή του αποθηκευμένου mp3.';
+            activeAudio = null;
         }
     });
 
     audio.play().catch(error => {
         console.error(error);
-        audioStatus.textContent = 'Ο browser δεν έπαιξε το αποθηκευμένο mp3. Άνοιξέ το από το link.';
+        if (activeAudioButton === button && button) {
+            button.classList.remove('is-playing');
+            activeAudioButton = null;
+        }
+        if (activeAudio === audio) {
+            activeAudio = null;
+        }
     });
 }
 
@@ -442,9 +458,12 @@ function deselectCountry() {
         activeAudio.currentTime = 0;
         activeAudio = null;
     }
+    if (activeAudioButton) {
+        activeAudioButton.classList.remove('is-playing');
+        activeAudioButton = null;
+    }
     modal.classList.add('hidden');
     updateGlobeStyles();
-    audioStatus.textContent = 'Πάτησε το εικονίδιο για να παίξει το αποθηκευμένο mp3.';
 }
 
 init();

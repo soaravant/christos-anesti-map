@@ -19,10 +19,10 @@ export const GREETING_COUNTRIES = [
         language: 'Ελληνικά',
         greeting: 'Χριστός Ανέστη!',
         response: 'Αληθώς Ανέστη!',
-        transliteration: 'Christos anesti! / Alithos anesti!',
         ttsLang: 'el',
         ttsText: 'Χριστός Ανέστη!',
-        audioSrc: './audio/greece-el.mp3',
+        greetingAudioSrc: './audio/greece-el.mp3',
+        responseAudioSrc: './audio/greece-el-response.mp3',
         images: placeholderSlides('Ελλάδα')
     },
     {
@@ -34,10 +34,10 @@ export const GREETING_COUNTRIES = [
         language: 'Αλβανικά',
         greeting: 'Krishti u ngjall!',
         response: 'Vërtet u ngjall!',
-        transliteration: 'Krishti u ngjall! / Vertet u ngjall!',
         ttsLang: 'sq',
         ttsText: 'Krishti u ngjall!',
-        audioSrc: './audio/albania-sq.mp3',
+        greetingAudioSrc: './audio/albania-sq.mp3',
+        responseAudioSrc: './audio/albania-sq-response.mp3',
         images: [
             { src: './images/alvania/photo_1.jpg', title: 'Ναός της Αναστάσεως' },
             { src: './images/alvania/photo_2.jpg', title: 'π. Αναστάσιος μαζί με πιστούς' },
@@ -54,10 +54,10 @@ export const GREETING_COUNTRIES = [
         language: 'Ρουμανικά',
         greeting: 'Hristos a înviat!',
         response: 'Adevărat a înviat!',
-        transliteration: 'Hristos a inviat! / Adevarat a inviat!',
         ttsLang: 'ro',
         ttsText: 'Hristos a înviat!',
-        audioSrc: './audio/romania-ro.mp3',
+        greetingAudioSrc: './audio/romania-ro.mp3',
+        responseAudioSrc: './audio/romania-ro-response.mp3',
         images: placeholderSlides('Ρουμανία')
     },
     {
@@ -69,10 +69,10 @@ export const GREETING_COUNTRIES = [
         language: 'Βουλγαρικά',
         greeting: 'Христос възкресе!',
         response: 'Воистина възкресе!',
-        transliteration: 'Hristos vozkrese! / Voistina vozkrese!',
         ttsLang: 'bg',
         ttsText: 'Христос възкресе!',
-        audioSrc: './audio/bulgaria-bg.mp3',
+        greetingAudioSrc: './audio/bulgaria-bg.mp3',
+        responseAudioSrc: './audio/bulgaria-bg-response.mp3',
         images: placeholderSlides('Βουλγαρία')
     },
     {
@@ -84,10 +84,10 @@ export const GREETING_COUNTRIES = [
         language: 'Σερβικά',
         greeting: 'Христос васкрсе!',
         response: 'Ваистину васкрсе!',
-        transliteration: 'Hristos vaskrse! / Vaistinu vaskrse!',
         ttsLang: 'sr',
         ttsText: 'Христос васкрсе!',
-        audioSrc: './audio/serbia-sr.mp3',
+        greetingAudioSrc: './audio/serbia-sr.mp3',
+        responseAudioSrc: './audio/serbia-sr-response.mp3',
         images: placeholderSlides('Σερβία')
     },
     {
@@ -99,10 +99,10 @@ export const GREETING_COUNTRIES = [
         language: 'Ρωσικά',
         greeting: 'Христос воскресе!',
         response: 'Воистину воскресе!',
-        transliteration: 'Khristos voskrese! / Voistinu voskrese!',
         ttsLang: 'ru',
         ttsText: 'Христос воскресе!',
-        audioSrc: './audio/russia-ru.mp3',
+        greetingAudioSrc: './audio/russia-ru.mp3',
+        responseAudioSrc: './audio/russia-ru-response.mp3',
         images: placeholderSlides('Ρωσία')
     },
     {
@@ -114,10 +114,10 @@ export const GREETING_COUNTRIES = [
         language: 'Ουκρανικά',
         greeting: 'Христос воскрес!',
         response: 'Воістину воскрес!',
-        transliteration: 'Khrystos voskres! / Voistynu voskres!',
         ttsLang: 'uk',
         ttsText: 'Христос воскрес!',
-        audioSrc: './audio/ukraine-uk.mp3',
+        greetingAudioSrc: './audio/ukraine-uk.mp3',
+        responseAudioSrc: './audio/ukraine-uk-response.mp3',
         images: placeholderSlides('Ουκρανία')
     },
     {
@@ -129,10 +129,10 @@ export const GREETING_COUNTRIES = [
         language: 'Ισπανικά',
         greeting: '¡Cristo ha resucitado!',
         response: '¡En verdad ha resucitado!',
-        transliteration: 'Cristo ha resucitado! / En verdad ha resucitado!',
         ttsLang: 'es',
         ttsText: 'Cristo ha resucitado!',
-        audioSrc: './audio/mexico-es.mp3',
+        greetingAudioSrc: './audio/mexico-es.mp3',
+        responseAudioSrc: './audio/mexico-es-response.mp3',
         images: [
             { src: './images/mexiko/photo_1.jpg', title: 'Κυριακή της Ορθοδοξίας' },
             { src: './images/mexiko/photo_2.jpg', title: 'Ιεραποστολή στους Αζτέκους' },
@@ -149,10 +149,10 @@ export const GREETING_COUNTRIES = [
         language: 'Πορτογαλικά',
         greeting: 'Cristo ressuscitou!',
         response: 'Em verdade ressuscitou!',
-        transliteration: 'Cristo ressuscitou! / Em verdade ressuscitou!',
         ttsLang: 'pt',
         ttsText: 'Cristo ressuscitou!',
-        audioSrc: './audio/brazil-pt.mp3',
+        greetingAudioSrc: './audio/brazil-pt.mp3',
+        responseAudioSrc: './audio/brazil-pt-response.mp3',
         images: placeholderSlides('Βραζιλία')
     },
     {
@@ -164,10 +164,10 @@ export const GREETING_COUNTRIES = [
         language: 'Αραβικά',
         greeting: 'المسيح قام!',
         response: 'حقا قام!',
-        transliteration: 'Al-Masih qam! / Haqqan qam!',
         ttsLang: 'ar',
         ttsText: 'المسيح قام!',
-        audioSrc: './audio/egypt-ar.mp3',
+        greetingAudioSrc: './audio/egypt-ar.mp3',
+        responseAudioSrc: './audio/egypt-ar-response.mp3',
         images: placeholderSlides('Αίγυπτος')
     },
     {
@@ -179,10 +179,10 @@ export const GREETING_COUNTRIES = [
         language: 'Σουαχίλι',
         greeting: 'Kristo amefufukka!',
         response: 'Kweli amefufukka!',
-        transliteration: 'Kristo amefufukka! / Kweli amefufukka!',
         ttsLang: 'sw',
         ttsText: 'Kristo amefufukka!',
-        audioSrc: './audio/kenya-sw.mp3',
+        greetingAudioSrc: './audio/kenya-sw.mp3',
+        responseAudioSrc: './audio/kenya-sw-response.mp3',
         images: [
             { src: './images/kenya/photo_1.jpg', title: 'Λιτανεία' },
             { src: './images/kenya/photo_2.jpg', title: 'Ιερός Ναός & Σχολείο' },
@@ -199,10 +199,10 @@ export const GREETING_COUNTRIES = [
         language: 'Ινδονησιακά',
         greeting: 'Kristus telah bangkit!',
         response: 'Dia benar-benar telah bangkit!',
-        transliteration: 'Kristus telah bangkit! / Dia benar-benar telah bangkit!',
         ttsLang: 'id',
         ttsText: 'Kristus telah bangkit!',
-        audioSrc: './audio/indonesia-id.mp3',
+        greetingAudioSrc: './audio/indonesia-id.mp3',
+        responseAudioSrc: './audio/indonesia-id-response.mp3',
         images: [
             { src: './images/indonisia/photo_1.jpg', title: 'Θεία Κοινωνία' },
             { src: './images/indonisia/photo_2.jpg', title: 'Σχολείο' },

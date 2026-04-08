@@ -15,16 +15,6 @@
 
 <body>
     <div id="app">
-        <div class="page-banner glass-panel">
-            <p class="eyebrow">Interactive Globe</p>
-            <h1>Χριστός Ανέστη στον Κόσμο</h1>
-            <p class="page-description">Πάτησε χώρα ή pin για να δεις πώς γράφεται το πασχαλινό μήνυμα και να ακούσεις την τοπικά αποθηκευμένη προφορά.</p>
-            <div class="page-links">
-                <a href="https://soaravant.github.io/interactive-world-map/">Ιεραποστολικός Χάρτης</a>
-                <a href="https://soaravant.github.io/anastasis-icon/">Εικόνα Αναστάσεως</a>
-            </div>
-        </div>
-
         <div id="globeViz"></div>
         <div id="atmosphere-overlay"></div>
 
@@ -37,39 +27,34 @@
             <button id="close-modal" aria-label="Κλείσιμο">&times;</button>
             <div class="modal-content">
                 <div class="country-header">
-                    <div>
-                        <p id="language-name" class="language-name">Γλώσσα</p>
-                        <h2 id="country-name">Χώρα</h2>
-                    </div>
+                    <h2 id="country-name">Χώρα</h2>
                     <div class="country-header-actions">
                         <div id="country-flag" class="flag-placeholder"></div>
-                        <button id="audio-greeting" class="audio-btn" type="button" aria-label="Αναπαραγωγή προφοράς">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path
-                                    d="M14 3.23v17.54a1 1 0 0 1-1.64.77L7.78 18H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h3.78l4.58-3.54A1 1 0 0 1 14 3.23Zm4.19 2.39a1 1 0 0 1 1.41 0 9 9 0 0 1 0 12.72 1 1 0 0 1-1.41-1.42 7 7 0 0 0 0-9.88 1 1 0 0 1 0-1.42Zm-2.83 2.83a1 1 0 0 1 1.41 0 5 5 0 0 1 0 7.08 1 1 0 1 1-1.41-1.42 3 3 0 0 0 0-4.24 1 1 0 0 1 0-1.42Z" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
 
                 <div class="greeting-card">
-                    <span class="card-label">Χαιρετισμός</span>
+                    <div class="phrase-header">
+                        <span class="phrase-label">Χριστός Ανέστη</span>
+                        <button id="audio-greeting" class="audio-btn inline-audio-btn" type="button" aria-label="Αναπαραγωγή Χριστός Ανέστη">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M14 3.23v17.54a1 1 0 0 1-1.64.77L7.78 18H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h3.78l4.58-3.54A1 1 0 0 1 14 3.23Zm4.19 2.39a1 1 0 0 1 1.41 0 9 9 0 0 1 0 12.72 1 1 0 0 1-1.41-1.42 7 7 0 0 0 0-9.88 1 1 0 0 1 0-1.42Zm-2.83 2.83a1 1 0 0 1 1.41 0 5 5 0 0 1 0 7.08 1 1 0 1 1-1.41-1.42 3 3 0 0 0 0-4.24 1 1 0 0 1 0-1.42Z" />
+                            </svg>
+                        </button>
+                    </div>
                     <p id="greeting-text" class="phrase-text">Χριστός Ανέστη!</p>
                 </div>
 
                 <div class="greeting-card secondary">
-                    <span class="card-label">Απάντηση</span>
+                    <div class="phrase-header">
+                        <span class="phrase-label">Αληθώς Ανέστη</span>
+                        <button id="audio-response" class="audio-btn inline-audio-btn" type="button" aria-label="Αναπαραγωγή Αληθώς Ανέστη">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M14 3.23v17.54a1 1 0 0 1-1.64.77L7.78 18H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h3.78l4.58-3.54A1 1 0 0 1 14 3.23Zm4.19 2.39a1 1 0 0 1 1.41 0 9 9 0 0 1 0 12.72 1 1 0 0 1-1.41-1.42 7 7 0 0 0 0-9.88 1 1 0 0 1 0-1.42Zm-2.83 2.83a1 1 0 0 1 1.41 0 5 5 0 0 1 0 7.08 1 1 0 1 1-1.41-1.42 3 3 0 0 0 0-4.24 1 1 0 0 1 0-1.42Z" />
+                            </svg>
+                        </button>
+                    </div>
                     <p id="response-text" class="phrase-text">Αληθώς Ανέστη!</p>
-                </div>
-
-                <div class="transliteration-block">
-                    <span class="card-label">Μεταγραφή</span>
-                    <p id="transliteration-text">Christos anesti! / Alithos anesti!</p>
-                </div>
-
-                <div class="audio-meta">
-                    <p id="audio-status" class="audio-status">Πάτησε το εικονίδιο για να παίξει το αποθηκευμένο mp3.</p>
-                    <a id="audio-fallback-link" class="audio-fallback-link" href="./audio/greece-el.mp3" target="_blank" rel="noopener noreferrer">Άνοιγμα mp3</a>
                 </div>
 
                 <div id="country-slideshow" class="slideshow" style="display: none;">
